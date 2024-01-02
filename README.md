@@ -8,6 +8,12 @@ this is a minimal treesitter movement in neovim similiar to helix treesitter mov
 ts_utils = require('nvim-treesitter.ts_utils')
 local m = {}
 
+local function is_node_equal(node1, node2)
+  local sr1,sc1,er1,ec1 = node1:range()
+  local sr2,sc2,er2,ec2 = node2:range()
+  return sr1 == sr2 and sc1 == sc2 and er1 == er2 and ec1 == ec2
+end
+
 local function init()
   if m["base"] == nil or vim.fn.mode() == 'n' then
     m["base"] = ts_utils.get_node_at_cursor()
